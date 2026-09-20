@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://cyvksqgijbiid"]
+[gd_scene format=4 uid="uid://cyvksqgijbiid"]
+
+[ext_resource type="Texture2D" uid="uid://dyd054bq1kv4n" path="res://icon.svg" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://dwon7kjmkks33" path="res://character_body_2d.gd" id="1_epypp"]
+[ext_resource type="Texture2D" uid="uid://cqlcbt7rrjxvl" path="res://art/grass.png" id="2_epypp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4tfo"]
+size = Vector2(36, 36)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
+texture = ExtResource("2_epypp")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_ff06f"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_0hol4")
 
 [node name="Node2D" type="Node2D" unique_id=282672922]
+position = Vector2(643, 558)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1510168865]
+position = Vector2(53, -22)
+script = ExtResource("1_epypp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=318101778]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_o4tfo")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1816733425]
+scale = Vector2(0.2890625, 0.2890625)
+texture = ExtResource("1_0e48y")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1001333562]
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ff06f")

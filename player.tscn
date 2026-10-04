@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bwygxs5j5vff7"]
+
+[ext_resource type="Script" uid="uid://dwon7kjmkks33" path="res://character_body_2d.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://fg3gvfeujuld" path="res://assets/art/blob.png" id="2_sweqy"]
+[ext_resource type="AudioStream" uid="uid://dgd8h3seubw5w" path="res://assets/sounds/grass sound.mp3" id="3_grass"]
+[ext_resource type="AudioStream" uid="uid://d3mnb66ab0jla" path="res://assets/sounds/gravel sound.mp3" id="4_gravel"]
+[ext_resource type="AudioStream" uid="uid://dm3d25o41tflr" path="res://assets/sounds/dirt sound.mp3" id="5_dirt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(36, 36)
+
+[node name="Player" type="CharacterBody2D" unique_id=386997313]
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=574922987]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1328236746]
+position = Vector2(9.536743e-07, 1.000001)
+scale = Vector2(0.56249994, 0.5625)
+texture = ExtResource("2_sweqy")
+
+[node name="GrassStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=871103435]
+stream = ExtResource("3_grass")
+volume_db = 7.776
+
+[node name="GravelStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=1822232499]
+stream = ExtResource("4_gravel")
+volume_db = 9.72
+
+[node name="DirtStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=984875430]
+stream = ExtResource("5_dirt")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1263027031]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0

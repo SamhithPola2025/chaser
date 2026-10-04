@@ -1,0 +1,35 @@
+[gd_resource type="TileSet" format=3 uid="uid://c8vxutugpj580"]
+
+[ext_resource type="Texture2D" uid="uid://cqlcbt7rrjxvl" path="res://assets/art/grass.png" id="1_14fb3"]
+[ext_resource type="Texture2D" uid="uid://47q4lp0d3hgv" path="res://assets/art/gravel.png" id="2_p0366"]
+[ext_resource type="Texture2D" uid="uid://dd7hkbet3pw8" path="res://assets/art/dirt.png" id="3_hobn4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_grass"]
+texture = ExtResource("1_14fb3")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "grass"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gravel"]
+texture = ExtResource("2_p0366")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "gravel"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dirt"]
+texture = ExtResource("3_hobn4")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "dirt"
+
+[resource]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "surface_type"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_grass")
+sources/1 = SubResource("TileSetAtlasSource_gravel")
+sources/2 = SubResource("TileSetAtlasSource_dirt")

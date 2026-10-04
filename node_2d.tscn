@@ -1,8 +1,16 @@
 [gd_scene format=4 uid="uid://cyvksqgijbiid"]
 
-[ext_resource type="Texture2D" uid="uid://dyd054bq1kv4n" path="res://icon.svg" id="1_0e48y"]
 [ext_resource type="Script" uid="uid://dwon7kjmkks33" path="res://character_body_2d.gd" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://cqlcbt7rrjxvl" path="res://art/grass.png" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://cqlcbt7rrjxvl" path="res://assets/art/grass.png" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://fg3gvfeujuld" path="res://assets/art/blob.png" id="2_hqns4"]
+[ext_resource type="AudioStream" uid="uid://dgd8h3seubw5w" path="res://assets/sounds/grass sound.mp3" id="3_kdubu"]
+[ext_resource type="AudioStream" uid="uid://d3mnb66ab0jla" path="res://assets/sounds/gravel sound.mp3" id="4_d21ai"]
+[ext_resource type="Texture2D" uid="uid://47q4lp0d3hgv" path="res://assets/art/gravel.png" id="4_q6r6c"]
+[ext_resource type="Texture2D" uid="uid://dd7hkbet3pw8" path="res://assets/art/dirt.png" id="5_kdubu"]
+[ext_resource type="AudioStream" uid="uid://dm3d25o41tflr" path="res://assets/sounds/dirt sound.mp3" id="5_rj586"]
+[ext_resource type="Script" uid="uid://cwd0dbw1rohev" path="res://killzone.gd" id="9_4d7sh"]
+[ext_resource type="Script" uid="uid://xh0ntajuld0j" path="res://flag.gd" id="10_flag"]
+[ext_resource type="Texture2D" uid="uid://cb8bb40i1lbv2" path="res://assets/other assets/flag_goal2.png" id="11_flagtex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4tfo"]
 size = Vector2(36, 36)
@@ -12,17 +20,42 @@ texture = ExtResource("2_epypp")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "grass"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21ai"]
+texture = ExtResource("4_q6r6c")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "gravel"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rj586"]
+texture = ExtResource("5_kdubu")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/custom_data_0 = "dirt"
 
 [sub_resource type="TileSet" id="TileSet_ff06f"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "surface_type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_0hol4")
+sources/1 = SubResource("TileSetAtlasSource_d21ai")
+sources/2 = SubResource("TileSetAtlasSource_rj586")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0h6"]
+size = Vector2(4756, 744)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flag"]
+size = Vector2(34, 96)
 
 [node name="Node2D" type="Node2D" unique_id=282672922]
 position = Vector2(643, 558)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1510168865]
-position = Vector2(53, -22)
+position = Vector2(-642, -175)
 script = ExtResource("1_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=318101778]
@@ -30,9 +63,66 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_o4tfo")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1816733425]
-scale = Vector2(0.2890625, 0.2890625)
-texture = ExtResource("1_0e48y")
+position = Vector2(-9.536743e-07, 1.0000134)
+scale = Vector2(0.5625, 0.56250024)
+texture = ExtResource("2_hqns4")
+
+[node name="GrassStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=2018533981]
+stream = ExtResource("3_kdubu")
+volume_db = 7.776
+
+[node name="GravelStreamPlayer2D2" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1981278579]
+stream = ExtResource("4_d21ai")
+volume_db = 9.72
+
+[node name="DirtStreamPlayer2D3" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1962534355]
+stream = ExtResource("5_rj586")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=27571729]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1001333562]
-tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD1//7/AAAAAAAAAAD1////AgAAAAAAAAD1/wAAAgAAAAAAAAD1/wEAAgAAAAAAAAD1/wIAAgAAAAAAAAD2//7/AAAAAAAAAAD2////AgAAAAAAAAD2/wAAAgAAAAAAAAD2/wEAAgAAAAAAAAD2/wIAAgAAAAAAAAD3//7/AAAAAAAAAAD3////AgAAAAAAAAD3/wAAAgAAAAAAAAD3/wEAAgAAAAAAAAD3/wIAAgAAAAAAAAD4/wAAAgAAAAAAAAD4/wEAAgAAAAAAAAD4/wIAAgAAAAAAAAD5////AAAAAAAAAAD5/wAAAgAAAAAAAAD5/wEAAgAAAAAAAAD5/wIAAgAAAAAAAAD6////AQAAAAAAAAD6/wAAAgAAAAAAAAD6/wEAAgAAAAAAAAD6/wIAAgAAAAAAAAD7////AQAAAAAAAAD7/wAAAgAAAAAAAAD7/wEAAgAAAAAAAAD7/wIAAgAAAAAAAAD8////AQAAAAAAAAD8/wAAAgAAAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAAAAAD9////AAAAAAAAAAD9/wAAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wIAAgAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD//wEAAgAAAAAAAAD//wIAAgAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAABAP7/AAAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAABAAIAAgAAAAAAAAACAP3/AQAAAAAAAAACAP7/AAAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAADAP3/AQAAAAAAAAADAP7/AAAAAAAAAAADAP//AgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAADAAIAAgAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AgAAAAAAAAAFAAAAAgAAAAAAAAAFAAEAAgAAAAAAAAAFAAIAAgAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AgAAAAAAAAAGAAAAAgAAAAAAAAAGAAEAAgAAAAAAAAAGAAIAAgAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AgAAAAAAAAAHAAAAAgAAAAAAAAAHAAEAAgAAAAAAAAAHAAIAAgAAAAAAAAD4////AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAD/////AgAAAAAAAAD//wAAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_ff06f")
+physics_quadrant_size = 1
+
+[node name="deatharea" type="Area2D" parent="." unique_id=561861581]
+position = Vector2(-694, 458)
+script = ExtResource("9_4d7sh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deatharea" unique_id=1125533151]
+position = Vector2(424, 367)
+shape = SubResource("RectangleShape2D_1k0h6")
+
+[node name="Flag" type="Area2D" parent="." unique_id=958769238]
+position = Vector2(480, -175)
+script = ExtResource("10_flag")
+next_level = "res://level2.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="Flag" unique_id=676805932]
+texture = ExtResource("11_flagtex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flag" unique_id=1332889457]
+shape = SubResource("RectangleShape2D_flag")
+
+[node name="Label" type="Label" parent="." unique_id=462700929]
+offset_left = -620.0
+offset_top = -286.0
+offset_right = 360.0
+offset_bottom = -263.0
+text = "Welcome to Chaser, you can use WASD/arrow keys to move, space to jump and remember that all the blocks break behind you!"
+
+[node name="Label2" type="Label" parent="." unique_id=301724699]
+offset_left = -372.0
+offset_top = 8.0
+offset_right = -195.0
+offset_bottom = 34.0
+text = "Gravel slows you down"
+
+[node name="Label3" type="Label" parent="." unique_id=1180267648]
+offset_left = 295.0
+offset_top = -88.0
+offset_right = 490.0
+offset_bottom = -62.0
+text = "Touch this flag to continue"
